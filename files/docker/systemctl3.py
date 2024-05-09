@@ -5513,7 +5513,7 @@ class Systemctl:
     igno_centos = ["netconsole", "network"]
     igno_opensuse = ["raw", "pppoe", "*.local", "boot.*", "rpmconf*", "postfix*"]
     igno_ubuntu = ["mount*", "umount*", "ondemand", "*.local"]
-    igno_always = ["network*", "dbus*", "systemd-*", "kdump*", "kmod*"]
+    igno_always = ["network*", "dbus*", "systemd-*", "kdump*", "kmod*", "snapd*", "cupsd*"]
     igno_always += ["purge-kernels.service", "after-local.service", "dm-event.*"] # as on opensuse
     igno_targets = ["remote-fs.target"]
     def _ignored_unit(self, unit, ignore_list):
@@ -5912,7 +5912,7 @@ class Systemctl:
     def read_log_files(self, units):
         self.print_log_files(units)
     def print_log_files(self, units, stdout = 1):
-        BUFSIZE=8192
+        BUFSIZE=10485760
         printed = 0
         for unit in units:
             if unit in self._log_file:
